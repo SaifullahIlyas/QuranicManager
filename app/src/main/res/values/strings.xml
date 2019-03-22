@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Quranic Manager</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="planets_array">
+        <item>An-Naba</item>
+        <item>An-Naziat</item>
+        <item>Abasa</item>
+        <item>At-Takwir</item>
+        <item>Al-Infitar</item>
+        <item>Al-Mutaffifin</item>
+        <item>Al-Inshiqaq</item>
+        <item>Al-Burooj</item>
+        <item>At-Tariq</item>
+        <item>Al-Ala</item>
+        <item>Al-Ghashiya</item>
+        <item>Al-Fajr</item>
+        <item>Al-Balad</item>
+        <item>Ash-Shams</item>
+        <item>Al-Lail</item>
+        <item>Ad-Dhuha</item>
+        <item>Al-Inshirah</item>
+        <item>At-Tin</item>
+        <item>Al-Alaq</item>
+        <item>Al-Qadr</item>
+        <item>Al-Bayyina</item>
+        <item>Az-Zalzala</item>
+        <item>Al-Adiyat</item>
+        <item>Al-Qaria</item>
+        <item>At-Takathur</item>
+        <item>Al-Asr</item>
+        <item>Al-Humaza</item>
+        <item>Al-Fil</item>
+        <item>Quraysh</item>
+        <item>Al-Maun</item>
+        <item>Al-Kawthar</item>
+        <item>Al-Kafirun</item>
+        <item>An-Nasr</item>
+        <item>Al-Masadd</item>
+        <item>Al-Ikhlas</item>
+        <item>Al-Falaq</item>
+        <item>Al-Nas</item>
+
+
+    </string-array>
+</resources>

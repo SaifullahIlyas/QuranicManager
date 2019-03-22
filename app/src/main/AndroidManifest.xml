@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:dist="http://schemas.android.com/apk/distribution"
+          package="com.example.quranicmanager">
+
+    <dist:module dist:instant="true"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <application
+            android:allowBackup="true"
+            android:icon="@drawable/ic_admin"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".feedbackdetail">
+        </activity>
+        <activity android:name=".fileAdd">
+        </activity>
+        <activity android:name=".traffic">
+        </activity>
+        <activity android:name=".feedBack">
+        </activity>
+        <activity android:name=".fileMenu">
+        </activity>
+        <activity android:name=".Users">
+        </activity>
+        <activity
+                android:name=".Home"
+                android:label="@string/title_activity_home"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Register">
+        </activity>
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

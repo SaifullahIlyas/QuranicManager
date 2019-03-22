@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "297192014169",
+    "firebase_url": "https://quranic-helper.firebaseio.com",
+    "project_id": "quranic-helper",
+    "storage_bucket": "quranic-helper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297192014169:android:9ab667a2c0641bd7",
+        "android_client_info": {
+          "package_name": "com.example.quranicmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297192014169-o6gafck35oj983mcl63p81q9jasj5eif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBJPMGKwnuMzlIhKzU_tYvZ-IWid_OjMk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
