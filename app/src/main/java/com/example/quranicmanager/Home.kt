@@ -3,6 +3,7 @@ package com.example.quranicmanager
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -10,8 +11,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.series.DataPoint
@@ -21,7 +27,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    private lateinit var db:FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -32,6 +38,23 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         {
             //Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
         }
+         db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("feednotification").document("notify")
+        docRef.addSnapshotListener(EventListener<DocumentSnapshot> { snapshot, e ->
+            if (e != null) {
+                Log.w("this is val", "Listen failed.", e)
+                Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show()
+                return@EventListener
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                Log.d("this is val", "Current data: ${snapshot.data}")
+                    val notification  = findViewById<TextView>(R.id.noticationView);
+                notification.text = snapshot["value"].toString()
+            } else {
+                Log.d("this is val", "Current data: null")
+            }
+        })
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
@@ -129,5 +152,16 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         series.spacing = 50
         series.valuesOnTopColor = Color.RED
 
+    }
+    fun handleNotification(view: View)
+    {
+        val docRef = db.collection("feednotification").document("notify");
+        docRef.update("value",0).addOnSuccessListener {
+            intent = Intent(this,feedBack::class.java)
+            startActivity(intent)
+
+        }.addOnFailureListener{
+           Toast.makeText(this,"please check your internet connection",Toast.LENGTH_LONG) .show()
+        };
     }
 }

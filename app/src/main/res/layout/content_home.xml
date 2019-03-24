@@ -18,9 +18,9 @@
     </LinearLayout>
 
   <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"  app:layout_constraintBottom_toBottomOf="parent">
-      <androidx.cardview.widget.CardView  android:layout_width="wrap_content" android:layout_alignParentRight="true"  android:layout_marginBottom="40dp" android:layout_marginRight="40dp"
+      <androidx.cardview.widget.CardView android:onClick="handleNotification"  android:layout_width="wrap_content" android:layout_alignParentRight="true"  android:layout_marginBottom="40dp" android:layout_marginRight="40dp"
                                          android:layout_height="wrap_content">
-          <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/color3" android:textSize="50sp" android:layout_gravity="right"/>
+          <TextView android:id="@+id/noticationView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/color3" android:textSize="50sp" android:layout_gravity="right"/>
           <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/notification" android:layout_gravity="bottom" android:layout_marginTop="30dp" android:layout_marginRight="30dp"/>
       </androidx.cardview.widget.CardView>
   </RelativeLayout>
