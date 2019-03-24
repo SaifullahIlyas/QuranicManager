@@ -21,7 +21,8 @@ val inetentaddfile = Intent(this,fileAdd::class.java)
             startActivity(inetentaddfile)
         }
         delOption!!.setOnClickListener {
-            Toast.makeText(this,"cardClicked",Toast.LENGTH_LONG).show()
+            val intent = Intent(this,DeleteFile::class.java)
+            startActivity(intent);
         }
         viewOption!!.setOnClickListener {
             val intent = Intent(this,FileView::class.java)

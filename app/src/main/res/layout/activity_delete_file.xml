@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="@color/color13" android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_margin="20dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/color20" android:orientation="vertical" android:layout_marginTop="0dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delete By" android:textSize="30sp" android:layout_marginLeft="30dp"/>
+        <RadioGroup android:layout_width="match_parent" android:layout_margin="30dp" android:layout_height="wrap_content" android:orientation="horizontal">
+            <RadioButton android:id="@+id/parahRadioDel" android:checked="true" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:text="Parah"  android:textSize="20sp" android:onClick="onRadioButtonClickedDel"/>
+
+            <RadioButton android:id="@+id/surahRadioDel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:text="Surah"  android:textSize="20sp" android:onClick="onRadioButtonClickedDel"/>
+            <RadioButton android:id="@+id/ayahRadioDel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                         android:text="ayah"  android:textSize="20sp" android:onClick="onRadioButtonClickedDel"/>
+
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout android:background="@color/color1" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_margin="20dp">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Parh" android:textSize="30sp" android:layout_marginLeft="0dp" android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:id="@+id/parahid"/>
+            <EditText android:text="30" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_toRightOf="@id/parahid" android:textSize="30sp" android:layout_marginLeft="20dp" android:layout_marginTop="-10dp" android:id="@+id/parahTfDel"/>
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Surah" android:textSize="30sp" android:layout_marginLeft="0dp" android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:id="@+id/surahId"/>
+            <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_toRightOf="@id/surahId" android:id="@+id/surahMenuDel" android:textSize="60sp" android:layout_marginLeft="20dp" android:layout_marginTop="0dp"></Spinner>
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ayat" android:textSize="30sp" android:layout_marginLeft="0dp" android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:id="@+id/ayahId"/>
+            <EditText android:layout_width="match_parent" android:id="@+id/ayahTfDel" android:layout_height="wrap_content" android:layout_toRightOf="@id/ayahId" android:textSize="30sp" android:layout_marginLeft="20dp" android:layout_marginTop="-10dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="50dp" android:background="@color/color20" android:layout_marginTop="50dp" android:text="Delete" android:textAllCaps="false" android:textSize="40sp" android:id="@+id/uploadBtn" android:onClick="delBtnClick"/>
+
+</LinearLayout>
