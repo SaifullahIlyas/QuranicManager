@@ -5,23 +5,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 
-class FileView : AppCompatActivity() {
-
+class ViewAyahList : AppCompatActivity() {
+lateinit var surah:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_file_view)
+        setContentView(R.layout.activity_view_ayah_list)
+        val intent = getIntent()
+
+        surah = intent.getStringExtra("surahname")
         getAllDocs()
     }
     private fun getAllDocs() {
         var i = 0;
         val array = ArrayList<String>()
-        val list = findViewById<ListView>(R.id.allFileList)
+        val list = findViewById<ListView>(R.id.ayahList)
         // [START get_multiple_all]
         val db = FirebaseFirestore.getInstance()
-        db.collection("parah30")
+        db.collection("parah30").document(surah).collection("ayah")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -34,17 +38,11 @@ class FileView : AppCompatActivity() {
 
             }.addOnCompleteListener{
                 try {
+                    array.sort()
                     val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
                     list.adapter = adapter
-                    list.setOnItemClickListener{parent, view, position, id ->
-                        Toast.makeText(this,parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show()
-                        val intent = Intent(this,ViewAyahList::class.java)
-                        intent.putExtra("surahname",parent.getItemAtPosition(position).toString())
-                        startActivity(intent)
-
 
                     }
-                }
                 catch (e:Exception)
                 {
                     Toast.makeText(this,e.message, Toast.LENGTH_LONG).show()
