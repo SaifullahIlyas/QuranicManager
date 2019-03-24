@@ -3,10 +3,7 @@ package com.example.quranicmanager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.Spinner
+import android.widget.*
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_file_add.*
 
@@ -87,10 +84,26 @@ deleetFile()
         var ref = db.collection("parah30").document()
         if (checkCode == 1) {
             ref = db.collection("parah30").document(spinner.selectedItem.toString())
-        } else if (checkCode == 2 )
-        {
-            ref = db.collection("parah30").document(spinner.selectedItem.toString()).collection("ayah").document(ayahTf.text.toString())
+        } else if (checkCode == 2 ) {
+            if (ayahTf.text != null)
+                ref = db.collection("parah30").document(spinner.selectedItem.toString()).collection("ayah")
+                    .document(ayahTf.text.toString())
+            else
+                Toast.makeText(this,"Ayah number is Required",Toast.LENGTH_LONG).show()
         }
-        ref.delete();
+        try {
+            ref.delete().addOnSuccessListener {
+                Toast.makeText(this,"Successfully file has been deleted",Toast.LENGTH_LONG).show()
+            }.addOnFailureListener{
+                Toast.makeText(this,"File not Deleted Please check your internet connection",Toast.LENGTH_LONG).show()
+            };
+
+        }
+        catch (e:Exception
+        )
+        {
+            //dkkdkkdkk
+        }
+
     }
 }
