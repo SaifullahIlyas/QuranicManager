@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent" android:layout_height="150dp" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView android:layout_width="100dp" android:layout_height="match_parent" android:src="@drawable/mp3ic" android:layout_alignParentLeft="true" android:id="@+id/mpicon"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="username"  android:layout_centerVertical="true" android:textSize="30sp" android:textColor="@color/Black" android:layout_centerHorizontal="true" android:id="@+id/feedusername"/>
+</RelativeLayout>

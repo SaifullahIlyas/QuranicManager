@@ -20,6 +20,14 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUserMetadata
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
+
 
 class Register : AppCompatActivity() {
     private val GALLERY = 1
@@ -37,9 +45,52 @@ class Register : AppCompatActivity() {
 
         }
         val registerBtn = findViewById<Button>(R.id.registerBtn)
-        registerBtn.setOnClickListener {
-            Toast.makeText(this, "here is the user register code", Toast.LENGTH_SHORT).show()
-        }
+            registerBtn.setOnClickListener {
+                val profilename = findViewById<EditText>(R.id.profilename)
+                var email: String = "Default";
+                val auth = FirebaseAuth.getInstance();
+                if (auth != null) {
+                    email = auth.currentUser?.email!!;
+                }
+                val fs = FirebaseStorage.getInstance()
+                var metadata = StorageMetadata.Builder()
+                    .setContentType("image/jpg")
+                    .build()
+                userImage.isDrawingCacheEnabled = true
+                userImage.buildDrawingCache()
+                val bitmap = (userImage?.drawable as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val ffs = FirebaseFirestore.getInstance()
+          val refrence   =  fs.getReference("users").child(email)
+
+
+                if (!profilename.text.isEmpty()) {
+               val path   =  refrence.putBytes(data, metadata).addOnSuccessListener {
+                        val data = HashMap<String, Any>()
+                        data["email"] = email
+                        data["profilename"] = profilename.text.toString();
+                        data["storageref"] = fs.reference.toString()
+
+                        ffs.collection("users").document(email).set(data).addOnSuccessListener {
+                            Toast.makeText(this, "Suuccesss!!!", Toast.LENGTH_LONG).show()
+                            profilename.setText("")
+                        }.addOnFailureListener {
+                            Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
+                        }
+
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
+                    }
+
+                }
+                else{
+                    Toast.makeText(this,"Enter profile name first",Toast.LENGTH_LONG).show()
+                }
+            }
+
 
     }
 
@@ -75,7 +126,16 @@ class Register : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == GALLERY) {
-            userimage.setImageURI(data?.data)
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            userimage.setImageBitmap(imageBitmap!!)
+
+        }
+        else if(resultCode==Activity.RESULT_OK&& requestCode==CAMERA)
+        {
+           // userimage.setImageURI(data?.data)
+           // val imageView = findViewById(R.id.ImageViewId) as ImageView
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            userimage.setImageBitmap(imageBitmap)
         }
 
     }

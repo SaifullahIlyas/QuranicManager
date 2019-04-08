@@ -7,11 +7,11 @@
         <item
                 android:id="@+id/files"
                 android:icon="@drawable/ic_mp3"
-                android:title="Files"/>
+                android:title="Upload Files"/>
         <item
-                android:id="@+id/users"
-                android:icon="@drawable/ic_user"
-                android:title="Users"/>
+                android:id="@+id/managefiles"
+                android:icon="@drawable/ic_mp3"
+                android:title="Manage Files"/>
         <item
                 android:id="@+id/traffic"
                 android:icon="@drawable/ic_traffic"
@@ -20,6 +20,18 @@
                 android:id="@+id/feedback"
                 android:icon="@drawable/ic_feedback"
                 android:title="FeedBack"/>
+        <item
+                android:id="@+id/RateManage"
+                android:icon="@drawable/ratng"
+                android:title="View Rating"/>
+        <item
+                android:id="@+id/updateprofile"
+                android:icon="@drawable/ic_user"
+                android:title="Update Profile"/>
+        <item
+                android:id="@+id/signoutitem"
+                android:icon="@drawable/ratng"
+                android:title="Signout"/>
     </group>
 
 </menu>

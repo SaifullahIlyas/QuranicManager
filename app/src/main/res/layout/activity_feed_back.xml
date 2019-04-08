@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ListView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/userfeedbacklist">
+    <ListView android:dividerHeight="10dp" android:layout_width="match_parent" android:layout_marginTop="30dp" android:layout_height="match_parent" android:id="@+id/userfeedbacklist">
 
     </ListView>
 </LinearLayout>

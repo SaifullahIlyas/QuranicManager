@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,9 +29,15 @@ import kotlinx.android.synthetic.main.content_home.*
 
 class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var db:FirebaseFirestore
+    var userEmail: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val intent = getIntent();
+        val value = intent.getStringExtra("userEmail")
+
         try {
+            userEmail = findViewById(R.id.hederUsername)!!
+            userEmail!!.text = value
 
             drawGraph()
         }
@@ -38,7 +45,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         {
             //Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
         }
-         db = FirebaseFirestore.getInstance()
+         db = FirebaseFirestore.getInstance()//code for showing notification on the application
         val docRef = db.collection("feednotification").document("notify")
         docRef.addSnapshotListener(EventListener<DocumentSnapshot> { snapshot, e ->
             if (e != null) {
@@ -97,7 +104,7 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
         when (item.itemId) {
             R.id.files -> {
                 try {
-                    val moveToFiles = Intent(this, fileMenu::class.java)
+                    val moveToFiles = Intent(this, fileAdd::class.java)
                     startActivity(moveToFiles)
                 } catch (e: Exception) {
                     Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -105,7 +112,17 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                 }
 
             }
-            R.id.users -> {
+            R.id.managefiles -> {
+                try {
+                    val moveToFiles = Intent(this, FileView::class.java)
+                    startActivity(moveToFiles)
+                } catch (e: Exception) {
+                    Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                    print(e.message)
+                }
+
+            }
+            R.id.updateprofile -> {
 
                 val moveToFiles = Intent(this, Register::class.java)
                 startActivity(moveToFiles)
@@ -119,6 +136,36 @@ class Home : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListene
                     startActivity(users)
 
 
+                }
+                catch (e:Exception)
+                {
+                    Toast.makeText(this,e.localizedMessage,Toast.LENGTH_LONG).show()
+                }
+
+            }
+            R.id.RateManage->{
+                try {
+                    val users = Intent(this, viewRating::class.java)
+                    startActivity(users)
+
+
+                }
+                catch (e:Exception)
+                {
+                    Toast.makeText(this,e.localizedMessage,Toast.LENGTH_LONG).show()
+                }
+
+            }
+            R.id.signoutitem->{
+                try {
+                    val auth = FirebaseAuth.getInstance();
+                    if(auth.currentUser!=null) {
+                        auth.signOut()
+                        val  intent = Intent(this,LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    }
                 }
                 catch (e:Exception)
                 {

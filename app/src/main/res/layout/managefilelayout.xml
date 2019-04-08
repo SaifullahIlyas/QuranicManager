@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+android:weightSum="4">
+    <ImageView android:layout_marginLeft="2dp" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/managemp3" android:src="@drawable/mp3ic"/>
+    <TextView android:layout_width="0dp" android:layout_height="39dp" android:textAlignment="center"
+              android:layout_weight="3" android:layout_margin="70dp" android:text="userText" android:textSize="12sp"
+              android:id="@+id/managename"/>
+
+"/>
+
+</LinearLayout>
