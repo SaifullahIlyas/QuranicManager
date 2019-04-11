@@ -2,11 +2,15 @@ package com.example.quranicmanager
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -20,21 +24,22 @@ class fileAdd : AppCompatActivity() {
     lateinit var uri:Uri
     lateinit var downloadString:String
     override fun onCreate(savedInstanceState: Bundle?) {
-        val parahTf: EditText?
+        val parahTf: Spinner?
         val ayahTf : EditText?
           val spinner: Spinner?
+        val progressBar:ProgressBar?
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_add)
         val uploadBtn = findViewById(R.id.uploadBtn) as? Button
         val parahradio = findViewById(R.id.parahRadio) as? RadioButton
-         parahTf = findViewById(R.id.parahTf) as? EditText
-         ayahTf = findViewById(R.id.ayahTf) as? EditText
+         parahTf = findViewById(R.id.parahTf) as? Spinner
         spinner = findViewById(R.id.surahMenu) as? Spinner
+        progressBar =  findViewById(R.id.uploadprogrees) as? ProgressBar
         if(parahradio!!.isChecked)
         {
-            ayahTf!!.isEnabled = false
-           parahTf!!.isEnabled = false
+
+           parahTf!!.isEnabled = true
                    spinner!!.isEnabled = false
 
         }
@@ -49,6 +54,9 @@ class fileAdd : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             spinner!!.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(this,R.array.paraharray,R.layout.spinnerlayout).also { arrayAdapter: ArrayAdapter<CharSequence> ->
+            parahTf!!.adapter = arrayAdapter;
         }
     }
     fun oploadBtnClick(view: View)
@@ -71,7 +79,6 @@ class fileAdd : AppCompatActivity() {
             when (view.getId()) {
                 R.id.parahRadio ->
                     if (checked) {
-                        this.ayahTf!!.isEnabled = false
                        this.parahTf!!.isEnabled = false
                         val sss =    findViewById(R.id.surahMenu) as? Spinner
                         sss!!.isEnabled = false
@@ -84,13 +91,6 @@ class fileAdd : AppCompatActivity() {
                      val sss =    findViewById(R.id.surahMenu) as? Spinner
                         sss!!.isEnabled = true
  checkCode = 1
-                    }
-                R.id.ayahRadio ->
-                    if (checked) {
-                        val sss =    findViewById(R.id.surahMenu) as? Spinner
-                        sss!!.isEnabled = true
-                        this.ayahTf.isEnabled = true
-                        checkCode = 2
                     }
             }
         }
@@ -114,6 +114,7 @@ class fileAdd : AppCompatActivity() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+   @RequiresApi(Build.VERSION_CODES.N)
    private fun upload() {
        val alertDialogBuilder = AlertDialog.Builder(this)
 
@@ -121,13 +122,13 @@ class fileAdd : AppCompatActivity() {
        alertDialogBuilder.setTitle("Uploading!!!!!!!!!!!!!!!!")
 
 // set dialog message
-
-
+val progressBar = findViewById(R.id.uploadprogrees) as? ProgressBar
+val progressCard  = findViewById(R.id.progresscard) as? CardView
+       val progressText  = findViewById(R.id.progresslable) as? TextView
 // create alert dialog
-       val alertDialog = alertDialogBuilder.create()
 
 // show it
-       alertDialog.show()
+
        var metadata = StorageMetadata.Builder()
            .setContentType("audio/mp3")
            .build()
@@ -135,24 +136,29 @@ class fileAdd : AppCompatActivity() {
 
         try {
             mReference.putFile(uri,metadata).addOnSuccessListener {
+                progressText!!.text = "100%"
                 Toast.makeText(this, "Successfully Uploaded !!!!", Toast.LENGTH_LONG).show()
             }.addOnFailureListener{
-
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             }.addOnPausedListener {
 
             }.addOnCanceledListener {
 
             }.addOnProgressListener {taskSnapshot->
                 val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
-                alertDialog.show()
-                alertDialogBuilder.setMessage(progress.toInt().toString()+"%").setCancelable(false)
+               progressCard!!.visibility = CardView.VISIBLE
+                window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                progressBar!!.progress = progress.toInt()
+                progressText!!.text = progress.toInt().toString()+"%";
 
 
                 //Toast.makeText(this, progress.toInt().toString()+"%", Toast.LENGTH_LONG).show()
             }.addOnCompleteListener{
+                progressText!!.text = "100%"
                 val downloadlink = mReference.downloadUrl
                 uploadInDatabase(downloadlink.toString())
-                alertDialog.dismiss()
+                progressCard!!.visibility = CardView.GONE
+                window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
             }
 
@@ -165,7 +171,6 @@ class fileAdd : AppCompatActivity() {
         link:String
     )
     {  val spinner  = findViewById(R.id.surahMenu) as Spinner
-        val ayahnumber =  findViewById<EditText>(R.id.ayahTf)
         val databs = FirebaseFirestore.getInstance()
         if (checkCode == 0)
         {
@@ -174,7 +179,7 @@ class fileAdd : AppCompatActivity() {
             linkval["storageRef"] = downloadString.toString()
 
 
-            databs.collection("parah30").document("parah30")
+            databs.collection("parah").document(parahTf.selectedItem.toString())
                 .set(linkval)
 
 
@@ -187,27 +192,7 @@ class fileAdd : AppCompatActivity() {
                 linkval["link"] = link.toString()
                 linkval["storageRef"] = downloadString.toString()
 
-                databs.collection("parah30").document(spinner.selectedItem.toString() )
-                    .set(linkval)
-
-            }
-            catch (e:Exception)
-            {
-                Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()
-            }
-
-        }
-        else if(checkCode == 2){
-            val ayahTf = findViewById<EditText>(R.id.ayahTf)
-            val ayahDoc = ayahTf.text.toString().toInt()
-            try {
-
-                val linkval = HashMap<String, Any>()
-                linkval["link"] = link.toString()
-                linkval["storageRef"] = downloadString.toString()
-
-
-                databs.collection("parah30").document(spinner.selectedItem.toString() ).collection("ayah").document(ayahDoc.toString())
+                databs.collection("surah").document(spinner.selectedItem.toString() )
                     .set(linkval)
 
             }
@@ -222,24 +207,20 @@ class fileAdd : AppCompatActivity() {
     {
 
     }
-    fun createStorageRefrence(): StorageReference {  val ayahTf = findViewById<EditText>(R.id.ayahTf)
+    fun createStorageRefrence(): StorageReference {
         val spinner  = findViewById(R.id.surahMenu) as Spinner
         val storage: FirebaseStorage = FirebaseStorage.getInstance()
-        var mReference :StorageReference=storage.reference.child("parah30")
+        var mReference :StorageReference=storage.reference.child("parah")
         if(checkCode==0)
-        {
-            mReference  = storage.reference.child("parah30")
-            downloadString = "parah30"
+        { downloadString = "parah/"+parahTf.selectedItem.toString()
+            mReference  = storage.reference.child("parah/"+parahTf.selectedItem.toString())
+
         }
        else if(checkCode==1)
-        { downloadString = "parah30/"+spinner.selectedItem.toString()
-            mReference  = storage.reference.child("parah30/"+spinner.selectedItem.toString())
+        { downloadString = "Surah/"+spinner.selectedItem.toString()
+            mReference  = storage.reference.child("surah/"+spinner.selectedItem.toString())
         }
-        else if(checkCode==2)
-        {
-            downloadString = "parah30/"+spinner.selectedItem.toString()+"/"+ayahTf.text.toString().toInt().toString()
-            mReference  = storage.reference.child("parah30/"+spinner.selectedItem.toString()+"/"+ayahTf.text.toString().toInt().toString())
-        }
+
         return mReference
     }
 

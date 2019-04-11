@@ -19,6 +19,10 @@ public class ManageFileAdapter extends BaseAdapter {
         this.context = context;
         this.modelObject = models;
     }
+    public void setAdapterchande( ArrayList<ManageFileModel> modelObject)
+    {
+        this.modelObject =   modelObject;
+    }
     @Override
     public boolean isEnabled(int position) {
         return super.isEnabled(position);

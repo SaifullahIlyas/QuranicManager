@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.Toolbar android:background="@color/Black_Cat" android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar" android:layout_width="match_parent" android:id="@+id/managetoolbar" android:layout_height="100dp" xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout  android:layout_width="match_parent" android:background="@color/Black_Cat" android:layout_height="match_parent">
+
+    <TextView android:layout_width="wrap_content" android:text="Quran Files" android:layout_margin="10dp" android:textSize="30sp" android:textColor="@color/white" android:layout_height="wrap_content"/>
+    <Switch android:textSize="20sp" android:width="150dp"  android:layout_width="wrap_content" android:textColor="@color/Green"  android:id="@+id/switchsurah" android:text="Surah" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_height="50dp" android:gravity="right"/>
+</RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>

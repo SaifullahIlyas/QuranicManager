@@ -18,7 +18,6 @@ class feedbackdetail : AppCompatActivity() {
     }
     fun readData(message:String)
     {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
         val refrence = FirebaseFirestore.getInstance()
         val refr = refrence.collection("Feedback").document(message)
         refr.get().addOnSuccessListener {document->

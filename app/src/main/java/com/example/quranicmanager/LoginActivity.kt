@@ -3,6 +3,7 @@ package com.example.quranicmanager
 import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,10 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -29,10 +32,11 @@ lateinit var user:EditText;
 
         val loginBtn = findViewById<Button>(R.id.signinBtn)
         loginBtn.setOnClickListener{
+            var view = it;
 
             val Auth = FirebaseAuth.getInstance()
 
-
+                     it.isEnabled = false
                 alertDialog.setTitle("Credential Error")
             alertDialog.setCancelable(true);
             alertDialog.setIcon(R.drawable.credential)
@@ -43,11 +47,13 @@ lateinit var user:EditText;
             if(user.text.length<1) {
                 alertDialog.setMessage("Email Required!!")
                 alertDialog.show()
+                it.isEnabled = true;
             }
 
             if (password.text.length<1){
                 alertDialog.setMessage("Password Required!!")
                 alertDialog.show()
+                it.isEnabled = true;
                 Log.d("email", "no value found")
             }
 
@@ -60,11 +66,13 @@ lateinit var user:EditText;
                     intent.putExtra("userEmail",user.text.toString().decapitalize())
                     startActivity(intent)
                     finish();
+                    view.isEnabled = true
 
                 }.addOnFailureListener{
 
                     alertDialog.setMessage(it.localizedMessage)
                     alertDialog.show()
+                    view.isEnabled = true;
                 }
 
             }
@@ -72,16 +80,13 @@ lateinit var user:EditText;
 
                 //alert
             //Auth.signInWithEmailAndPassword()
-            Toast.makeText(this,"Login Validation code",Toast.LENGTH_SHORT).show()
            /* val intent = Intent(this,Home::class.java)
             startActivity(intent)*/
 
         }
         val registerBtn = findViewById<Button>(R.id.nothaveBtn)
         registerBtn.setOnClickListener{
-            Toast.makeText(this,"Here is the Register Code ",Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
+
         }
 
     }
@@ -90,4 +95,6 @@ lateinit var user:EditText;
         super.onBackPressed()
         finish()
     }
+
+
 }

@@ -10,6 +10,39 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="paraharray">
+        <item>	Alif Lam Meem</item>
+        <item>	Sayaqool </item>
+        <item> Tilkal Rusull</item>
+        <item>Lan Tana Loo</item>
+        <item>Wal Mohsanat </item>
+        <item>La Yuhibbullah </item>
+        <item>Wa Iza Samiu </item>
+        <item>Wa Lau Annana </item>
+        <item>Qalal Malao </item>
+        <item>Wa Alamu </item>
+        <item>Yatazeroon </item>
+        <item>Wa Mamin Daabat </item>
+        <item>Wa Ma Ubrioo </item>
+        <item>Rubama </item>
+        <item>Subhanallazi </item>
+        <item>Qal Alam </item>
+        <item>Aqtarabo</item>
+        <item>Qadd Aflaha </item>
+        <item>Wa Qalallazina </item>
+        <item>Aman Khalaq</item>
+        <item>Utlu Ma Oohi</item>
+        <item>Wa Manyaqnut</item>
+        <item>Wa Mali </item>
+        <item>Faman Azlam </item>
+        <item>Elahe Yuruddo</item>
+        <item>Haa Meem</item>
+        <item>Qala Fama Khatbukum</item>
+        <item>Qadd Sami Allah</item>
+        <item>Tabarakallazi</item>
+        <item>Amma Yatasaaloon</item>
+
+    </string-array>
     <string-array name="planets_array">
         <item>An-Naba</item>
         <item>An-Naziat</item>

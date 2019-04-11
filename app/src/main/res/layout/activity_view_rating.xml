@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:orientation="vertical" android:background="@color/Black_Cat" android:layout_width="match_parent" android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RatingBar  android:outlineSpotShadowColor="@color/Green" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:numStars="5" android:layout_marginTop="100dp" android:layout_gravity="center" android:id="@+id/ratingbaruser"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="40dp" android:id="@+id/numerofUser" android:text="Users Rate this App" android:textSize="20sp" android:layout_gravity="center"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="40dp" android:id="@+id/Averagerating" android:text="Average Rating is " android:textSize="20sp" android:layout_gravity="center"/>
+    <RatingBar android:clickable="false" android:background="@color/Grape"  android:outlineSpotShadowColor="@color/Green" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:numStars="5" android:layout_marginTop="100dp" android:layout_gravity="center" android:id="@+id/ratingbaruser"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="40dp" android:textColor="@color/Green" android:id="@+id/numerofUser" android:text="Users Rate this App" android:textSize="20sp" android:layout_gravity="center"/>
+    <TextView android:layout_width="wrap_content" android:textColor="@color/Green" android:layout_height="40dp" android:id="@+id/Averagerating" android:text="Average Rating is " android:textSize="20sp" android:layout_gravity="center"/>
 
 </LinearLayout>

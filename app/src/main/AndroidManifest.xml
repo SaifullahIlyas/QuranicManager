@@ -19,39 +19,42 @@
         <activity android:name=".viewRating">
             
         </activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
         <activity android:name=".DeleteFile">
         </activity>
         <activity android:name=".ViewAyahList">
         </activity>
-        <activity android:name=".FileView">
+        <activity android:name=".FileView" android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".feedbackdetail">
         </activity>
-        <activity android:name=".fileAdd">
+        <activity android:name=".fileAdd" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         </activity>
         <activity android:name=".traffic">
+
+
         </activity>
         <activity android:name=".feedBack">
         </activity>
         <activity android:name=".fileMenu">
         </activity>
-        <activity android:name=".Users">
-        </activity>
         <activity
                 android:name=".Home"
                 android:label="@string/title_activity_home"
                 android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity android:name=".Register">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar">
 
 
 

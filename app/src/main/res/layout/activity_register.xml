@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"/>
     <Button
-            android:text="Register"
+            android:text="Update"
             android:layout_width="213dp"
             android:layout_height="wrap_content"
             android:id="@+id/registerBtn" android:layout_marginTop="50dp"

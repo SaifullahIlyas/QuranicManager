@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:src="@drawable/ic_user"
             android:contentDescription="@string/nav_header_desc"
-            android:id="@+id/imageView"/>
+            android:id="@+id/userimage"/>
 
     <TextView
             android:layout_width="match_parent"
@@ -33,6 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="xyz@gmail.com"
-            android:id="@+id/userEmail"/>
+            android:id="@+id/headerEmail"/>
 
 </LinearLayout>
